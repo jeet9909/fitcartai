@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# App uses HashRouter, so no SPA redirect rules are required — every route
+# lives under a #/… fragment and the server only ever serves index.html.
