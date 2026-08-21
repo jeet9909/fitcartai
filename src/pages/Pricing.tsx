@@ -13,14 +13,16 @@ function Cell({ v, accent }: { v: boolean | string; accent: string }) {
 }
 
 export default function Pricing() {
-  const { tier, setTier, toast } = useApp()
+  const { tier, setTier, toast, signedIn } = useApp()
   const nav = useNavigate()
   const [annual, setAnnual] = useState(false)
 
   const choose = (id: TierId) => {
+    if (id === 'guest') { toast('Exploring as guest'); nav('/explore'); return }
+    if (!signedIn) { nav('/login', { state: { plan: id, next: '/studio' } }); return }  // sign in to activate a plan
     setTier(id)
-    if (id === 'guest') { toast('Exploring as guest'); nav('/explore') }
-    else { toast(`${TIERS.find(t => t.id === id)!.name} unlocked (demo)`, '✓'); nav('/studio') }
+    toast(`${TIERS.find(t => t.id === id)!.name} plan active`, '✓')
+    nav('/studio')
   }
 
   return (

@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
+import RequireAuth from './components/RequireAuth'
 import Landing from './pages/Landing'
 import Explore from './pages/Explore'
 import ProductDetail from './pages/ProductDetail'
@@ -11,6 +12,10 @@ import Partner from './pages/Partner'
 import Admin from './pages/Admin'
 import Pricing from './pages/Pricing'
 import HowItWorks from './pages/HowItWorks'
+import Login from './pages/Login'
+import Account from './pages/Account'
+import Saved from './pages/Saved'
+import Orders from './pages/Orders'
 import NotFound from './pages/NotFound'
 
 export default function App() {
@@ -28,6 +33,10 @@ export default function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/partner" element={<Partner />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
+        <Route path="/saved" element={<RequireAuth><Saved /></RequireAuth>} />
+        <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

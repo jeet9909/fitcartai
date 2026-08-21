@@ -41,7 +41,7 @@ const ANGLE_LABEL = (a: number) => {
 }
 
 export default function Studio() {
-  const { avatarId, setAvatar, outfit, setOutfitSlot, clearSlot, addToCart, toast, tier, setTier } = useApp()
+  const { avatarId, setAvatar, outfit, setOutfitSlot, clearSlot, addToCart, toast, tier, setTier, signedIn, saveOutfit } = useApp()
   const nav = useNavigate()
   const avatar = avatarById(avatarId)
   const [angle, setAngle] = useState(20)
@@ -71,6 +71,21 @@ export default function Studio() {
     if (chosen.length === 0) { toast('Add some items first', '!'); return }
     chosen.forEach(c => addToCart(c.product.id, c.size))
     toast(`${chosen.length} item${chosen.length > 1 ? 's' : ''} added to FitCart`, '🛒')
+  }
+
+  const onSaveOutfit = () => {
+    if (chosen.length === 0) { toast('Add some items first', '!'); return }
+    if (!signedIn) { toast('Sign in to save outfits', '🔒'); nav('/login', { state: { next: '/studio' } }); return }
+    const fitScores = apparel.map(({ product, size }) => fitReport(avatar, product, size).score)
+    const fitAvg = fitScores.length ? Math.round((fitScores.reduce((s, v) => s + v, 0) / fitScores.length) * 10) / 10 : undefined
+    saveOutfit({
+      name: oScore ? `${oScore.occasionLabel.replace('-', ' ')} look` : 'My outfit',
+      avatarId,
+      items: chosen.map(c => ({ slot: c.slot, productId: c.product.id, size: c.size })),
+      fit: fitAvg,
+      outfit: oScore?.composite,
+    })
+    toast('Outfit saved to your looks', '💾')
   }
 
   return (
@@ -186,9 +201,12 @@ export default function Studio() {
                 )
               })}
             </div>
-            <button className="btn btn-primary btn-block" style={{ marginTop: 14 }} onClick={addOutfitToCart}>
-              <IconCart size={18} /> Add outfit to FitCart <IconArrowR size={16} />
-            </button>
+            <div className="row gap-8" style={{ marginTop: 14 }}>
+              <button className="btn btn-ghost" onClick={onSaveOutfit} title="Save this look">💾 Save</button>
+              <button className="btn btn-primary grow" onClick={addOutfitToCart}>
+                <IconCart size={18} /> Add to FitCart <IconArrowR size={16} />
+              </button>
+            </div>
           </div>
 
           {/* OUTFIT SCORE */}
