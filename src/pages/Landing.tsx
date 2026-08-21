@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Modal from '../components/Modal'
 import Avatar from '../components/Avatar'
+import ProductCard from '../components/ProductCard'
 import { AVATARS } from '../data/avatars'
-import { productById } from '../data/products'
+import { productById, PRODUCTS } from '../data/products'
 import { STORE_LIST } from '../data/stores'
 import { IconArrowR, IconShield, IconRuler, IconLayers, IconSparkle, IconStore, IconUser, IconCheck, IconTag } from '../components/Icon'
 
@@ -141,6 +142,19 @@ export default function Landing() {
           </div>
           <div className="row center gap-16 wrap" style={{ marginTop: 30 }}>
             {STORE_LIST.map(s => <span key={s.id} className="chip">{s.name}</span>)}
+          </div>
+        </div>
+      </section>
+
+      {/* TRENDING */}
+      <section className="section">
+        <div className="container">
+          <div className="row between" style={{ marginBottom: 20, alignItems: 'flex-end' }}>
+            <div><span className="eyebrow">Trending now</span><h2 style={{ fontSize: 28, marginTop: 6 }}>Popular across your stores</h2></div>
+            <Link to="/explore" className="btn btn-ghost btn-sm">View all <IconArrowR size={14} /></Link>
+          </div>
+          <div className="grid prod-grid">
+            {[...PRODUCTS].sort((a, b) => b.ratingCount - a.ratingCount).slice(0, 4).map(p => <ProductCard key={p.id} product={p} />)}
           </div>
         </div>
       </section>

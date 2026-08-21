@@ -13,6 +13,7 @@ import Admin from './pages/Admin'
 import Pricing from './pages/Pricing'
 import HowItWorks from './pages/HowItWorks'
 import Login from './pages/Login'
+import Wishlist from './pages/Wishlist'
 import Account from './pages/Account'
 import Saved from './pages/Saved'
 import Orders from './pages/Orders'
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/partner" element={<Partner />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
         <Route path="/saved" element={<RequireAuth><Saved /></RequireAuth>} />
         <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />

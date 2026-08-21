@@ -79,7 +79,7 @@ export default function Layout() {
             {!signedIn && <button className="guest-tag" onClick={() => nav('/pricing')} style={{ border: 0, cursor: 'pointer' }}>
               <IconSparkle size={13} /> Guest
             </button>}
-            <button className="icon-btn" aria-label="Wishlist" onClick={() => nav('/explore')}>
+            <button className="icon-btn" aria-label="Wishlist" onClick={() => nav('/wishlist')}>
               <IconHeart size={19} />{wishlist.length > 0 && <span className="count-dot">{wishlist.length}</span>}
             </button>
             <button className="icon-btn" aria-label="Cart" onClick={() => nav('/cart')}>
