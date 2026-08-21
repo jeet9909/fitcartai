@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import Modal from '../components/Modal'
 import Avatar from '../components/Avatar'
 import { AVATARS } from '../data/avatars'
 import { productById } from '../data/products'
@@ -21,8 +23,38 @@ const VALUES = [
 ]
 
 export default function Landing() {
+  const nav = useNavigate()
+  const [welcome, setWelcome] = useState(false)
+  useEffect(() => {
+    try { if (!localStorage.getItem('fitcart-welcomed')) setWelcome(true) } catch { /* no storage */ }
+  }, [])
+  const closeWelcome = () => { try { localStorage.setItem('fitcart-welcomed', '1') } catch {} ; setWelcome(false) }
+
   return (
     <>
+      <Modal open={welcome} onClose={closeWelcome} title="Welcome to FitCart AI 👋">
+        <p className="small muted" style={{ marginBottom: 14 }}>The AI try-on & fit-intelligence layer between you and the stores you already shop.</p>
+        <div className="stack gap-10" style={{ marginBottom: 16 }}>
+          {[
+            ['🛍️', 'Discover across stores', 'Build one outfit from Myntra, AJIO, Amazon, Flipkart & Nykaa.'],
+            ['🪞', 'See it on your avatar', 'Try the look on a body like yours, rotate & inspect the fit.'],
+            ['📏', 'Fit & Outfit scores', 'Know whether it fits you and whether the look works — before you buy.'],
+          ].map(([e, t, d]) => (
+            <div className="row gap-10" key={t}>
+              <span style={{ fontSize: 22 }}>{e}</span>
+              <div><div className="strong small">{t}</div><div className="tiny muted">{d}</div></div>
+            </div>
+          ))}
+        </div>
+        <div className="banner banner-accent" style={{ marginBottom: 14 }}>
+          <span aria-hidden>✨</span><div className="tiny">Browse free as a <strong>guest</strong>. Sign in to save outfits and unlock <strong>Pro</strong> (AI fit images) & <strong>Studio 3D</strong> (your 3D avatar).</div>
+        </div>
+        <div className="row gap-10">
+          <button className="btn btn-primary grow" onClick={() => { closeWelcome(); nav('/studio') }}>Try the Studio</button>
+          <button className="btn btn-ghost" onClick={() => { closeWelcome(); nav('/pricing') }}>See plans</button>
+        </div>
+      </Modal>
+
       {/* HERO */}
       <section className="hero">
         <div className="container hero-grid">

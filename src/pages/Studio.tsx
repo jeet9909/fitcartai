@@ -321,7 +321,7 @@ export default function Studio() {
             </ul>
             <div className="row gap-10">
               <button className="btn btn-primary grow" style={{ background: '#7c3aed', borderColor: '#7c3aed' }}
-                onClick={() => { setTier('studio'); setUploadOpen(false); toast('Studio 3D unlocked (demo)', '✨') }}>Unlock Studio 3D</button>
+                onClick={() => { setUploadOpen(false); if (!signedIn) { nav('/login', { state: { plan: 'studio', next: '/studio' } }) } else { setTier('studio'); toast('Studio 3D unlocked', '✨') } }}>{signedIn ? 'Unlock Studio 3D' : 'Sign in to unlock'}</button>
               <button className="btn btn-ghost" onClick={() => { setUploadOpen(false); nav('/pricing') }}>Compare plans</button>
             </div>
           </>
