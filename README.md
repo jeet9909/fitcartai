@@ -1,8 +1,10 @@
-# FitCart AI — Interactive Stakeholder Demo
+# FitCart AI — Web App
 
-A clickable product prototype that shows how **FitCart AI** works: an **AI try-on + fit-intelligence layer that sits between shoppers and the fashion stores they already use** (Myntra, AJIO, Amazon, Flipkart, Nykaa, Meesho).
+**Live:** https://jeet9909.github.io/fitcartai/ (auto-deploys from `main` via GitHub Pages)
 
-> This is a **demo/prototype for stakeholder validation** — not a production app. There are no real accounts, payments, or store integrations. All data is realistic but simulated, and the AI try-on/fit results are computed by lightweight demo logic (clearly labelled).
+**FitCart AI** is an **AI try-on + fit-intelligence layer that sits between shoppers and the fashion stores they already use** (Myntra, AJIO, Amazon, Flipkart, Nykaa, Meesho). Build an outfit across stores, try it on a personalized avatar, get a **Fit Score** and **Outfit Score**, and hand off to the store to buy.
+
+A **fully-functional web app**: real account/auth flow, **tier-based access control** (Guest → Style → Pro → Studio 3D), saved outfits, orders, wishlist, and a Pro-gated outfit comparison. Front-end state is self-contained in the browser (localStorage); AI try-on/fit is computed by the in-app fit & outfit engines and clearly framed — no real payments, and store handoff is a compliant deep-link/affiliate simulation.
 
 ---
 
