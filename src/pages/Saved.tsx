@@ -31,8 +31,10 @@ export default function Saved() {
 
   return (
     <div className="container section" style={{ paddingTop: 24 }}>
-      <h1 style={{ fontSize: 26, marginBottom: 6 }}>Saved outfits</h1>
-      <p className="muted small" style={{ marginBottom: 20 }}>{saved.length} look{saved.length !== 1 ? 's' : ''}</p>
+      <div className="row between wrap gap-12" style={{ marginBottom: 20 }}>
+        <div><h1 style={{ fontSize: 26 }}>Saved outfits</h1><p className="muted small" style={{ marginTop: 4 }}>{saved.length} look{saved.length !== 1 ? 's' : ''}</p></div>
+        {saved.length >= 2 && <Link to="/compare" className="btn btn-soft btn-sm"><IconLayers size={15} /> Compare <span className="badge badge-brand" style={{ marginLeft: 2 }}>Pro</span></Link>}
+      </div>
       <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(280px,1fr))', gap: 16 }}>
         {saved.map(o => (
           <div className="card card-pad" key={o.id}>

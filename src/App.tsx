@@ -16,6 +16,7 @@ import Login from './pages/Login'
 import Wishlist from './pages/Wishlist'
 import Account from './pages/Account'
 import Saved from './pages/Saved'
+import Compare from './pages/Compare'
 import Orders from './pages/Orders'
 import NotFound from './pages/NotFound'
 
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/account" element={<RequireAuth><Account /></RequireAuth>} />
         <Route path="/saved" element={<RequireAuth><Saved /></RequireAuth>} />
+        <Route path="/compare" element={<RequireAuth><Compare /></RequireAuth>} />
         <Route path="/orders" element={<RequireAuth><Orders /></RequireAuth>} />
         <Route path="*" element={<NotFound />} />
       </Route>
